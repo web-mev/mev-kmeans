@@ -1,0 +1,70 @@
+{
+    "name": "K-means", 
+    "description": "Executes the k-means clustering. Note that this is an iterative algorithm and the choice of initial clusters is random. Thus, the cluster assignments may change even with the same input data and parameters.", 
+    "inputs": {
+        "input_matrix": {
+            "description": "The input matrix. For example, a gene expression matrix for a cohort of samples.", 
+            "name": "Input matrix:", 
+            "required": true, 
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_types": ["MTX","I_MTX", "EXP_MTX", "RNASEQ_COUNT_MTX"], 
+                "many": false
+            }
+        }, 
+        "dimension": {
+            "description": "In which dimension should we cluster? For example, you can cluster the samples/observations (most common) or you can cluster genes/features.", 
+            "name": "Clustering dimension:", 
+            "required": true, 
+            "spec": {
+                "attribute_type": "OptionString",
+                "options":["Samples/observations","Genes/features"],
+                "default":"Samples/observations"
+            }
+        },
+        "num_clusters": {
+            "description": "The number of clusters. In k-means, you choose the number of clusters up front.", 
+            "name": "Number of clusters:", 
+            "required": true, 
+            "spec": {
+                "attribute_type": "PositiveInteger"
+            }
+        },
+        "num_iter": {
+            "description": "The number of iterations to run. If this number is not large enough, then the cluster assignment may not have completed. The default of 300 is usually fine.", 
+            "name": "Number of k-means iterations (default 300):", 
+            "required": false, 
+            "spec": {
+                "attribute_type": "PositiveInteger",
+                "default": 300
+            }
+        },
+        "samples": {
+            "description": "The samples to use in the clustering. This will subset your input matrix. By default, it will use all samples/observations.", 
+            "name": "Samples/observations:", 
+            "required": false, 
+            "spec": {
+                "attribute_type": "ObservationSet"
+            }
+        },
+        "features": {
+            "description": "The genes/features to use in the clustering. By default, it will use all genes/features.", 
+            "name": "Genes/features:", 
+            "required": false, 
+            "spec": {
+                "attribute_type": "FeatureSet"
+            }
+        }
+    }, 
+    "outputs": {
+        "kmeans_results": {
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "JSON",
+                "many": false
+            }
+        }
+    }, 
+    "mode": "local_docker",
+    "workspace_operation": true
+}
