@@ -1,1 +1,1 @@
-/opt/software/run_kmeans.py -i {{input_matrix}} -d {{dimension}} -n {{num_clusters}} -j {{num_iters}} {% if samples %} -s {{samples}} {% endif %} {% if features %} -s {{features}} {% endif %}
+/opt/software/run_kmeans.py -i {{input_matrix}} -d {{dimension}} -n {{num_clusters}} -j {{num_iter}} {% if samples %} -s {{samples}} {% endif %} {% if features %} -s {{features}} {% endif %}

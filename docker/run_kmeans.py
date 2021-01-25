@@ -8,8 +8,6 @@ import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 import argparse
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 OBSERVATIONS = 'Samples/observations'
 FEATURES = 'Genes/features'
