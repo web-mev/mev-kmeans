@@ -95,13 +95,20 @@ if __name__ == '__main__':
                 ' Was the list of genes/features specified properly?')
             sys.exit(1)
 
-    # Drop any genes that are missing. Regardless of which dimension we are 
+    # Drop any genes that are fully missing. Regardless of which dimension we are 
     # clustering on, we can't work with NAs. In the case of clustering on 
     # observations, this just removes one of the components of the sample-expression
     # vector. In the case of clustering on the genes/features, then we *could*
     # try to cluster using the remaining genes, but it's just simpler to remove
     # the genes outright. 
-    df = df.dropna(0)
+    df = df.dropna(0, how='all')
+
+    # Fill the remaining NAs with zeros
+    df = df.fillna(0)
+
+    if df.shape[0] == 0:
+        sys.stderr.write('After removing the missing values, the resulting matrix was empty.')
+        sys.exit(1) 
 
     # now run the k-means alg.
     kmeans = KMeans(n_clusters=args.num_clusters, max_iter=args.iterations)
