@@ -119,6 +119,15 @@ if __name__ == '__main__':
     if args.cluster_dimension == OBSERVATIONS:
         df = df.T
 
+    # The error reported by the fit method is perhaps a bit cryptic for our users. Give a more
+    # expansive explanation here
+    if df.shape[0] < args.num_clusters:
+        sys.stderr.write('You are attempting to cluster {n} items into {c} clusters. The number'
+            ' of samples should be greater than the number of clusters. Otherwise, each item'
+            ' would just cluster by itself.'.format(n=df.shape[0], c=args.num_clusters)
+        )
+        sys.exit(1)
+        
     try:
         # the fit_transform method expects a (samples, features) orientation
         transformed = kmeans.fit(df)
