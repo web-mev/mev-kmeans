@@ -89,7 +89,11 @@ if __name__ == '__main__':
     # if a subset of genes/features was requested, subset the matrix:
     if args.features:
         requested_feature_list = list(set([x.strip() for x in args.features.split(',')]))
-        df = df.loc[requested_feature_list]
+        try:
+            df = df.loc[requested_feature_list]
+        except KeyError as ex:
+            sys.stderr.write(f'Failed to subset the genes/feature. Error reported was {ex}')
+            sys.exit(1)
         if df.shape[0] == 0:
             sys.stderr.write('After filtering for the requested genes/features, the matrix was empty.'
                 ' Was the list of genes/features specified properly?')

@@ -6,6 +6,7 @@
             "description": "The input matrix. For example, a gene expression matrix for a cohort of samples.", 
             "name": "Input matrix:", 
             "required": true, 
+            "converter": "api.converters.data_resource.LocalDockerSingleVariableDataResourceConverter",
             "spec": {
                 "attribute_type": "VariableDataResource", 
                 "resource_types": ["MTX","I_MTX", "EXP_MTX", "RNASEQ_COUNT_MTX"], 
@@ -16,6 +17,7 @@
             "description": "In which dimension should we cluster? For example, you can cluster the samples/observations (most common) or you can cluster genes/features.", 
             "name": "Clustering dimension:", 
             "required": true, 
+            "converter": "api.converters.basic_attributes.StringConverter",
             "spec": {
                 "attribute_type": "OptionString",
                 "options":["Samples/observations","Genes/features"],
@@ -26,6 +28,7 @@
             "description": "The number of clusters. In k-means, you choose the number of clusters up front.", 
             "name": "Number of clusters:", 
             "required": true, 
+            "converter": "api.converters.basic_attributes.IntegerConverter",
             "spec": {
                 "attribute_type": "PositiveInteger"
             }
@@ -34,6 +37,7 @@
             "description": "The number of iterations to run. If this number is not large enough, then the cluster assignment may not have completed. The default of 300 is usually fine.", 
             "name": "Number of k-means iterations (default 300):", 
             "required": false, 
+            "converter": "api.converters.basic_attributes.IntegerConverter",
             "spec": {
                 "attribute_type": "PositiveInteger",
                 "default": 300
@@ -43,6 +47,7 @@
             "description": "The samples to use in the clustering. This will subset your input matrix. By default, it will use all samples/observations.", 
             "name": "Samples/observations:", 
             "required": false, 
+            "converter": "api.converters.element_set.ObservationSetCsvConverter",
             "spec": {
                 "attribute_type": "ObservationSet"
             }
@@ -51,6 +56,7 @@
             "description": "The genes/features to use in the clustering. By default, it will use all genes/features.", 
             "name": "Genes/features:", 
             "required": false, 
+            "converter": "api.converters.element_set.FeatureSetCsvConverter",
             "spec": {
                 "attribute_type": "FeatureSet"
             }
@@ -59,6 +65,7 @@
     "outputs": {
         "kmeans_results": {
             "required": true,
+            "converter": "api.converters.data_resource.LocalDockerSingleDataResourceConverter",
             "spec": {
                 "attribute_type": "DataResource", 
                 "resource_type": "JSON",
