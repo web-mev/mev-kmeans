@@ -14,7 +14,7 @@ Note that this is intended for use in clustering expression data, but the k-mean
 
 Either:
 - build the Docker image using the contents of the `docker/` folder (e.g. `docker build -t myuser/kmeans:v1 .`) 
-- pull the docker image from the GitHub container repository (see https://github.com/web-mev/deseq2/pkgs/container/deseq2)
+- pull the docker image from the GitHub container repository (see https://github.com/web-mev/mev-kmeans/pkgs/container/mev-kmeans)
 
 To run, enter the container in an interactive shell:
 ```
