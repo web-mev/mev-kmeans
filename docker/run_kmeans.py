@@ -105,7 +105,7 @@ if __name__ == '__main__':
     # vector. In the case of clustering on the genes/features, then we *could*
     # try to cluster using the remaining genes, but it's just simpler to remove
     # the genes outright. 
-    df = df.dropna(0, how='all')
+    df = df.dropna(axis=0, how='all')
 
     # Fill the remaining NAs with zeros
     df = df.fillna(0)
