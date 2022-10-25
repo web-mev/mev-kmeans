@@ -17,7 +17,7 @@
             "description": "In which dimension should we cluster? For example, you can cluster the samples/observations (most common) or you can cluster genes/features.", 
             "name": "Clustering dimension:", 
             "required": true, 
-            "converter": "api.converters.basic_attributes.StringConverter",
+            "converter": "api.converters.basic_attributes.UnrestrictedStringConverter",
             "spec": {
                 "attribute_type": "OptionString",
                 "options":["Samples/observations","Genes/features"],
