@@ -20,11 +20,13 @@ To run, enter the container in an interactive shell:
 ```
 docker run -it -v$PWD:/work <IMAGE>
 ```
-(here, we mount the current directory to `/work` inside the container)
+(here, we mount the current directory to `/work` inside the container). 
+
+Note that this `docker run` command automatically activates a built-in conda environment. If you override this by using Docker's `--entrypoint` flag then the conda environment will *not* be active and the necessary software installations will not be present.
 
 Then, run the script:
 ```
-/opt/software/run_kmeans.py \
+python3 /usr/local/bin/run_kmeans.py \
     -i <path to expression matrix> \
     -d <"Samples/observations" | "Genes/features"> \
     -n <number of clusters as integer> \

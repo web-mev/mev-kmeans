@@ -1,13 +1,9 @@
-FROM debian:bullseye
+FROM mambaorg/micromamba
 
-RUN apt-get update && \
-    apt-get install -y python3-dev python3-pip
+# for building the conda env
+COPY --chown=$MAMBA_USER:$MAMBA_USER environment.yml /tmp/environment.yml
+# Build the environment based on the yml file
+RUN micromamba install -y -n base -f /tmp/environment.yml \
+  && micromamba clean --all --yes
 
-# Install some Python3 libraries:
-RUN mkdir /opt/software
-ADD requirements.txt /opt/software/
-ADD run_kmeans.py /opt/software/
-RUN chmod +x /opt/software/run_kmeans.py
-RUN pip3 install -r /opt/software/requirements.txt
-
-ENTRYPOINT ["/opt/software/run_kmeans.py"]
+ADD run_kmeans.py /usr/local/bin
